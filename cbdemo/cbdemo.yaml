@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cbdemo-ui
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: cbdemo-ui
+  template:
+    metadata:
+      labels:
+        app: cbdemo-ui
+    spec:
+      containers:
+      - image: harbor.cbksworld.com/tanzu/cbdemo
+        name: cbdemo-ui
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: cbdemo-svc
+  name: cbdemo-svc
+spec:
+  ports:
+    - port: 80
+      targetPort: 8080
+  selector:
+    app: cbdemo-ui
+  type: LoadBalancer
