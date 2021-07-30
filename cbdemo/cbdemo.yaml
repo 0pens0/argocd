@@ -14,7 +14,7 @@ spec:
         app: cbdemo-ui
     spec:
       containers:
-      - image: harbor.cbksworld.com/tanzu/cbdemo
+      - image: harbor.cbksworld.com/tanzu/cbdemo:latest
         name: cbdemo-ui
         ports:
         - containerPort: 8080
